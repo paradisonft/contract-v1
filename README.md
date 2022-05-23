@@ -26,7 +26,7 @@ you wish to build the image yourself, you can do so as follows:
   - Build and load the docker container: `docker load < $(nix-build default.nix -A devcontainer)`,
   - Adjust the `.devcontainer/devcontainer.json` file to point to your local image.
 
-# Credits
+## Credits
 
 The FixedPrice sales validator within this repo is based on an original version [here](https://github.com/MartifyLabs/martify.contracts).
 
