@@ -1,0 +1,11 @@
+cradle:
+  cabal:
+
+    - path: "./src"
+      component: "paradiso:lib:paradiso"
+
+    - path: "./app/fixed-price-plutus.hs"
+      component: "paradiso:exe:fixed-price-plutus"
+
+    - path: "./app/fixed-price-datum-json.hs"
+      component: "paradiso:exe:fixed-price-datum-json"

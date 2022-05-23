@@ -30,5 +30,5 @@ you wish to build the image yourself, you can do so as follows:
 
 The FixedPrice sales validator within this repo is based on an original version [here](https://github.com/MartifyLabs/martify.contracts).
 
-Many thanks to [MartifyLabs](https://github.com/MartifyLabs) for open sourcing their smart contracts to the community.
+Thanks to [MartifyLabs](https://github.com/MartifyLabs) for open sourcing their smart contracts to the community.
 

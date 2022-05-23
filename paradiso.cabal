@@ -1,0 +1,99 @@
+cabal-version:      2.4
+name:               paradiso
+version:            0.1.0.0
+author:             Paradiso
+maintainer:         hello@paradiso.app
+
+flag defer-plugin-errors
+    description:
+        Defer errors from the plugin, useful for things like Haddock that can't handle it.
+    default: False
+    manual: True
+
+common base
+  build-depends: base >= 4.14 && < 4.15
+
+common project-config
+    default-language:       Haskell2010
+
+    default-extensions:     NoImplicitPrelude
+                            OverloadedStrings
+    ghc-options:
+      -Wall
+      -Wcompat
+      -Wnoncanonical-monad-instances
+      -Wincomplete-uni-patterns
+      -Wpartial-fields
+      -Wincomplete-record-updates
+      -Wredundant-constraints
+      -Wunused-packages
+      -Widentities
+      -rtsopts
+      -fobject-code
+      -fno-ignore-interface-pragmas
+      -fno-omit-interface-pragmas
+    if flag(defer-plugin-errors)
+        ghc-options: -fplugin-opt PlutusTx.Plugin:defer-errors
+
+library
+    exposed-modules:
+        Paradiso.Contracts.FixedPrice.Types
+        , Paradiso.Contracts.FixedPrice.OnChain
+        , Paradiso.Contracts.FixedPrice.OffChain
+        , Paradiso.Contracts.FixedPrice.Trace
+        , Paradiso.Contracts.FixedPrice.Utility
+        , SerialiseJSON
+    build-depends:
+        base >= 4.9 && < 5,
+        aeson,
+        base16-bytestring,
+        binary,
+        bech32,
+        dlist,
+        bytestring,
+        serialise,
+        data-default,
+        lens,
+        containers,
+        nonempty-containers,
+        freer-extras,
+        text,
+        playground-common,         
+        plutus-contract,
+        plutus-chain-index,
+        plutus-tx-plugin,
+        plutus-tx,
+        plutus-ledger,
+        plutus-ledger-api,
+        cardano-api,
+        prettyprinter,
+        tagged,
+        cardano-ledger-alonzo,
+        cardano-binary
+    hs-source-dirs: src
+    default-language:    Haskell2010
+    ghc-options:         -Wall -fobject-code -fno-ignore-interface-pragmas -fno-omit-interface-pragmas -fno-strictness -fno-spec-constr -fno-specialise
+
+executable fixed-price-plutus
+  import:               base, project-config
+  hs-source-dirs:       app
+  main-is:              fixed-price-plutus.hs
+  ghc-options:          -threaded -rtsopts "-with-rtsopts=-T"
+
+  build-depends:        cardano-api
+                      , paradiso
+                      , plutus-ledger-api
+                      , bytestring
+                      , cardano-ledger-alonzo
+
+executable fixed-price-datum-json
+  import:               base, project-config
+  hs-source-dirs:       app
+  main-is:              datum-json.hs
+  ghc-options:          -threaded -rtsopts "-with-rtsopts=-T"
+
+  build-depends:        paradiso
+                      , bytestring
+                      , cardano-api
+                      , plutus-tx
+                      , aeson
