@@ -60,7 +60,7 @@ import Plutus.ChainIndex.Tx ( ChainIndexTx(_citxData) )
 
 import           Paradiso.Contracts.FixedPrice.Types               (ContractParams(..), FixedPriceSale(..), FixedPriceAction(..), FixedPriceSchema, StartRequest(..), BuyRequest(..), UpdateRequest(..), CancelRequest(..))
 import           Paradiso.Contracts.FixedPrice.OnChain             as O2 (FixedPricing, typedFixedPriceValidator, fixedPriceValidator, maybeGetOutputDatum)
-import           Paradiso.Contracts.FixedPrice.Utility             (localSettings, companyPkhLocal, authorPkhLocal)
+import           Paradiso.Contracts.FixedPrice.Utility             (localSettings)
 
 startSale :: StartRequest -> Contract w FixedPriceSchema Text ()
 startSale sr = do
